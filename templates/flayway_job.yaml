@@ -5,12 +5,28 @@ metadata:
   namespace: flyway
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
 spec:
   template:
     spec:
+      restartPolicy: Never
+
+      initContainers:
+        - name: fetch-migrations
+          image: alpine/git:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              git clone --single-branch --branch main https://github.com/srinadh-cheediri/flyway-helm.git /tmp/ && sleep 10 &&
+              cp -r /tmp/migration/V*.sql /flyway/sql/ && ls /flyway/sql/ && echo "clonning migration files is sussesfull"
+
+          volumeMounts:
+            - name: sql
+              mountPath: /flyway/sql
+
       containers:
         - name: flyway
-          image: {Values.flyway.image}:{Values.flyway.tag}
+          image: "{{.Values.flyway.image}}:{{.Values.flyway.tag}}"
           command: ["/bin/sh", "-c"]
           args:
             - >
@@ -20,18 +36,15 @@ spec:
               -password=$(DB_PASSWORD)
               -locations=filesystem:/flyway/sql
               migrate
+
           envFrom:
             - secretRef:
                 name: db-secret
+
           volumeMounts:
             - name: sql
               mountPath: /flyway/sql
 
-      restartPolicy: Never
-
       volumes:
         - name: sql
-          configMap:
-            name: flyway-sql
-
-  backoffLimit: 1
+          emptyDir: {}
