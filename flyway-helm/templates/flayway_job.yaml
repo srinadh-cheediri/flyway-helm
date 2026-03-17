@@ -32,7 +32,7 @@ spec:
           args:
             - >
               flyway
-              -url=jdbc:postgresql://$(DB_HOST):5432/$(DB_NAME)
+              -url=jdbc:mysql://$(DB_HOST):3306/$(DB_NAME)
               -user=$(DB_USER)
               -password=$(DB_PASSWORD)
               -locations=filesystem:/flyway/sql
