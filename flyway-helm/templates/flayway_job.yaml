@@ -18,7 +18,7 @@ spec:
           args:
             - >
               git clone --single-branch --branch main https://github.com/srinadh-cheediri/flyway-helm.git /tmp/ && sleep 10 &&
-              cp -r /tmp/migrations/V*.sql /flyway/sql/ && ls /flyway/sql/ && echo "clonning migration files is sussesfull"
+              cp -r /tmp/flyway-helm/migrations/V*.sql /flyway/sql/ && ls /flyway/sql/ && echo "clonning migration files is sussesfull"
 
           volumeMounts:
             - name: sql
