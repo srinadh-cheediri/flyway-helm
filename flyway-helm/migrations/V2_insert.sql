@@ -1,1 +1,3 @@
+use appdb;
+
 INSERT INTO test_table (name) VALUES ('Hello from Helm internal migrations');
