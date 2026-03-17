@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: flyway-migration
+  namespace: flyway
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade
 spec:

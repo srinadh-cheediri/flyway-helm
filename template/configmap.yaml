@@ -2,8 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: flyway-sql
+  namespace: flyway
 data:
-{{- $files := .Files.Glob "migrations/*.sql" }}
+{{- $files := .Files.Glob "migrations/V*.sql" }}
 {{- range $path, $file := $files }}
   {{ base $path }}: |
 {{ $file | indent 4 }}
