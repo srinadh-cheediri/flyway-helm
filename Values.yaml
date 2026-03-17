@@ -1,0 +1,3 @@
+flyway:
+ image: flyway/flyway
+ tag: latest
