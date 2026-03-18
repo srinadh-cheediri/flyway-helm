@@ -1,4 +1,4 @@
 flyway:
  image: flyway/flyway
  tag: latest
-gitCommit: latest
+#gitCommit: latest
