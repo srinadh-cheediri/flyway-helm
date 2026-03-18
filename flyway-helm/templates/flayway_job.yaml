@@ -10,6 +10,7 @@ metadata:
     #"helm.sh/hook-delete-policy": before-hook-creation
     #checksum/migrations: {{ (.Files.Glob "migrations/V*.sql").AsConfig | sha256sum }}
 spec:
+  ttlSecondsAfterFinished: 300
   backoffLimit: 1
   template:
     spec:
