@@ -6,7 +6,7 @@ metadata:
   annotations:
     #"helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation
-    checksum/migrations: {{ (.Files.Glob "flyway-helm/migrations/V*.sql").AsConfig | sha256sum }}
+    checksum/migrations: {{ (.Files.Glob "migrations/V*.sql").AsConfig | sha256sum }}
 spec:
   backoffLimit: 1
   template:
