@@ -1,7 +1,6 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  #name: flyway-migration-{{ .Values.gitCommit | trunc 8 }}
   name: flyway-migration-{{ (.Files.Glob "migrations/V*.sql").AsConfig | sha256sum | trunc 8 }}
   namespace: flyway
   #annotations:
