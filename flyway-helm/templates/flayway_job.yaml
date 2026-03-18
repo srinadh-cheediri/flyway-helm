@@ -3,9 +3,9 @@ kind: Job
 metadata:
   name: flyway-migration-{{ .Values.gitCommit | trunc 8 }}
   namespace: flyway
-  annotations:
+  #annotations:
     #argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+    #argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
     #"helm.sh/hook": pre-install,pre-upgrade
     #"helm.sh/hook-delete-policy": before-hook-creation
     #checksum/migrations: {{ (.Files.Glob "migrations/V*.sql").AsConfig | sha256sum }}
